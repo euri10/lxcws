@@ -1,0 +1,29 @@
+upstream backendrutorrent {
+        server unix:/var/run/php-fpm-rutorrent.sock;
+}
+upstream backendrtorrent {
+        server unix:/home/{{USER}}/.rtorrent.sock;
+}
+server {
+        listen 8000;
+        server_name {{DOMAIN}};
+
+        location / {
+                root /home/{{USER}}/ruTorrent ;
+                access_log /var/log/nginx/rutorrent.access.log;
+                error_log /var/log/nginx/rutorrent.error.log;
+                location ~ .php$ {
+                        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                        fastcgi_index index.php;
+                        include fastcgi.conf;
+                        fastcgi_pass    backendrutorrent;
+                }
+        }
+
+        location /RPC2 {
+            access_log /var/log/nginx/rutorrent.rpc2.access.log;
+            error_log /var/log/nginx/rutorrent.rpc2.error.log;
+            include /etc/nginx/scgi_params;
+            scgi_pass backendrtorrent;
+        }
+}

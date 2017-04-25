@@ -1,0 +1,21 @@
+--- /home/{{USER}}/{{WEBSITE}}/{{WEBSITE}}/urls.py	2017-03-18 15:46:35.997399676 +0100
++++ /home/{{USER}}/{{WEBSITE}}/{{WEBSITE}}/urls.py	2017-03-18 15:46:56.929200020 +0100
+@@ -13,9 +13,16 @@
+     1. Import the include() function: from django.conf.urls import url, include
+     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+ """
+-from django.conf.urls import url
++from django.conf.urls import include, url
+ from django.contrib import admin
++from oscar.app import application
+ 
+ urlpatterns = [
+-    url(r'^admin/', admin.site.urls),
++    url(r'^i18n/', include('django.conf.urls.i18n')),
++
++    # The Django admin is not officially supported; expect breakage.
++    # Nonetheless, it's often useful for debugging.
++    url(r'^admin/', include(admin.site.urls)),
++
++    url(r'', include(application.urls)),
+ ]

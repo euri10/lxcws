@@ -1,0 +1,3 @@
+pytest
+click
+git+git://github.com/lxc/lxc.git@master#subdirectory=src/python-lxc

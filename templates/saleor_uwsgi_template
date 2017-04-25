@@ -1,0 +1,11 @@
+[uwsgi]
+die-on-term = true
+socket = /tmp/saleor.sock
+chdir = /home/{{USER}}/saleor
+chown-socket = {{USER}}:www-data
+chmod-socket = 660
+master = true
+memory-report = true
+module = saleor.wsgi:application
+processes = 4
+static-map = /static=/app/static

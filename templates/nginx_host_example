@@ -1,0 +1,15 @@
+upstream saleor  {
+    server {{GUEST_IP most likely 10.0.3.XXX}}:8000; #saleor
+}
+server {
+    listen  80;
+    server_name     {{DOMAIN}};
+
+    location / {
+        proxy_pass          http://saleor;
+        proxy_redirect      off;
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+}
