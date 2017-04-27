@@ -172,7 +172,7 @@ def install_torrent(container_name, user_lxcws, domain_lxcws):
                               '\t$scgi_host = "unix://'+socket+'";\n'})
 
         a = run_cmd(container, ['rtorrent'], uid=1000, gid=1000)
-        print(a)
+        logger.debug(a)
 
 
 @click.command()
