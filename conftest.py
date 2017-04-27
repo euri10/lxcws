@@ -35,9 +35,8 @@ def temp_container(request):
     logger.debug('end {}'.format(container_name))
 
 
-
-d= {'debian': (['jessie', 'stretch', 'sid'], ['amd64']),
-    'ubuntu': (['xenial', 'yakkety', 'zesty'], ['amd64', 'i386'])}
+d = {'debian': (['jessie', 'stretch', 'sid'], ['amd64']),
+     'ubuntu': (['xenial', 'yakkety', 'zesty'], ['amd64', 'i386'])}
 
 dist_permut = [(dist, release, arch) for dist, v in d.items() for release in v[0] for arch in v[1]]
 
